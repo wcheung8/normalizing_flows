@@ -11,6 +11,7 @@ import torchvision.transforms as T
 from torchvision.utils import save_image
 
 import matplotlib
+
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
@@ -19,15 +20,13 @@ import math
 import argparse
 import pprint
 import copy
+from ptsemseg.models import get_model
 
 from data import fetch_dataloaders
-
 
 parser = argparse.ArgumentParser()
 # action
 parser.add_argument('--train', action='store_true', help='Train a flow.')
-parser.add_argument('--evaluate', action='store_true', help='Evaluate a flow.')
-parser.add_argument('--restore_file', type=str, help='Path to model to restore.')
 parser.add_argument('--generate', action='store_true', help='Generate samples from a model.')
 parser.add_argument('--data_dir', default='./data/', help='Location of datasets.')
 parser.add_argument('--output_dir', default='./results/{}'.format(os.path.splitext(__file__)[0]))
@@ -42,23 +41,68 @@ parser.add_argument('--model', default='maf', help='Which model to use: made, ma
 # made parameters
 parser.add_argument('--n_blocks', type=int, default=5, help='Number of blocks to stack in a model (MADE in MAF; Coupling+BN in RealNVP).')
 parser.add_argument('--n_components', type=int, default=1, help='Number of Gaussian clusters for mixture of gaussians models.')
-parser.add_argument('--hidden_size', type=int, default=100, help='Hidden layer size for MADE (and each MADE block in an MAF).')
+parser.add_argument('--hidden_size', type=int, default=64, help='Hidden layer size for MADE (and each MADE block in an MAF).')
 parser.add_argument('--n_hidden', type=int, default=1, help='Number of hidden layers in each MADE.')
 parser.add_argument('--activation_fn', type=str, default='relu', help='What activation function to use in the MADEs.')
-parser.add_argument('--input_order', type=str, default='sequential', help='What input order to use (sequential | random).')
+parser.add_argument('--input_order', type=str, default='random', help='What input order to use (sequential | random).')
 parser.add_argument('--conditional', default=False, action='store_true', help='Whether to use a conditional model.')
 parser.add_argument('--no_batch_norm', action='store_true')
 # training params
-parser.add_argument('--batch_size', type=int, default=100)
+parser.add_argument('--batch_size', type=int, default=4)
 parser.add_argument('--n_epochs', type=int, default=50)
 parser.add_argument('--start_epoch', default=0, help='Starting epoch (for logging; to be overwritten when restoring file.')
 parser.add_argument('--lr', type=float, default=1e-4, help='Learning rate.')
 parser.add_argument('--log_interval', type=int, default=1000, help='How often to show loss statistics and save samples.')
 
+############
+parser.add_argument('--restore_file', default=None, type=str, help='Path to model to restore.')
+parser.add_argument('--use_encoder', default=False, action='store_true', help='Whether to use a conditional model.')
+parser.add_argument('--channel', type=int, default=-1, help='How often to show loss statistics and save samples.')
+parser.add_argument('--input_size', type=int, default=0, help='How often to show loss statistics and save samples.')
+
+
+#############
 
 # --------------------
 # Model layers and helpers
 # --------------------
+
+
+def loadEncoder():
+    model = get_model(name='DeepLab',
+                      modality='rgb',
+                      n_classes=14,
+                      input_size=(128, 128),
+                      in_channels=3,
+                      mcdo_passes=1,
+                      dropoutP=0,
+                      full_mcdo=0,
+                      device='cuda',
+                      temperatureScaling=False,
+                      freeze_seg=True,
+                      freeze_temp=True).cuda()
+
+    model = torch.nn.DataParallel(model, device_ids=range(torch.cuda.device_count()))
+
+    model_pkl = '/home/wcheung8/Desktop/pytorch-semseg/models/DeepLab/rgb_DeepLab/rgb_DeepLab_airsim_T000.pkl'
+
+    checkpoint = torch.load(model_pkl)
+
+    pretrained_dict = checkpoint['model_state']
+    model_dict = model.state_dict()
+
+    # 1. filter out unnecessary keys
+    pretrained_dict = {k: v.resize_(model_dict[k].shape) for k, v in pretrained_dict.items() if (
+            k in model_dict)}  # and ((model!="fuse") or (model=="fuse" and not start_layer in k))}
+
+    # 2. overwrite entries in the existing state dict
+    model_dict.update(pretrained_dict)
+
+    # 3. load the new state dict
+    model.load_state_dict(pretrained_dict, strict=False)
+
+    return model
+
 
 def create_masks(input_size, hidden_size, n_hidden, input_order='sequential', input_degrees=None):
     # MADE paper sec 4:
@@ -91,6 +135,7 @@ def create_masks(input_size, hidden_size, n_hidden, input_order='sequential', in
 
 class MaskedLinear(nn.Linear):
     """ MADE building block layer """
+
     def __init__(self, input_size, n_outputs, mask, cond_label_size=None):
         super().__init__(input_size, n_outputs)
 
@@ -114,6 +159,7 @@ class MaskedLinear(nn.Linear):
 
 class LinearMaskedCoupling(nn.Module):
     """ Modified RealNVP Coupling Layers per the MAF paper """
+
     def __init__(self, input_size, hidden_size, n_hidden, mask, cond_label_size=None):
         super().__init__()
 
@@ -161,6 +207,7 @@ class LinearMaskedCoupling(nn.Module):
 
 class BatchNorm(nn.Module):
     """ RealNVP BatchNorm layer """
+
     def __init__(self, input_size, momentum=0.9, eps=1e-5):
         super().__init__()
         self.momentum = momentum
@@ -175,7 +222,7 @@ class BatchNorm(nn.Module):
     def forward(self, x, cond_y=None):
         if self.training:
             self.batch_mean = x.mean(0)
-            self.batch_var = x.var(0) # note MAF paper uses biased variance estimate; ie x.var(0, unbiased=False)
+            self.batch_var = x.var(0)  # note MAF paper uses biased variance estimate; ie x.var(0, unbiased=False)
 
             # update running mean
             self.running_mean.mul_(self.momentum).add_(self.batch_mean.data * (1 - self.momentum))
@@ -193,8 +240,8 @@ class BatchNorm(nn.Module):
 
         # compute log_abs_det_jacobian (cf RealNVP paper)
         log_abs_det_jacobian = self.log_gamma - 0.5 * torch.log(var + self.eps)
-#        print('in sum log var {:6.3f} ; out sum log var {:6.3f}; sum log det {:8.3f}; mean log_gamma {:5.3f}; mean beta {:5.3f}'.format(
-#            (var + self.eps).log().sum().data.numpy(), y.var(0).log().sum().data.numpy(), log_abs_det_jacobian.mean(0).item(), self.log_gamma.mean(), self.beta.mean()))
+        #        print('in sum log var {:6.3f} ; out sum log var {:6.3f}; sum log det {:8.3f}; mean log_gamma {:5.3f}; mean beta {:5.3f}'.format(
+        #            (var + self.eps).log().sum().data.numpy(), y.var(0).log().sum().data.numpy(), log_abs_det_jacobian.mean(0).item(), self.log_gamma.mean(), self.beta.mean()))
         return y, log_abs_det_jacobian.expand_as(x)
 
     def inverse(self, y, cond_y=None):
@@ -215,6 +262,7 @@ class BatchNorm(nn.Module):
 
 class FlowSequential(nn.Sequential):
     """ Container for layers of a normalizing flow """
+
     def forward(self, x, y):
         sum_log_abs_det_jacobians = 0
         for module in self:
@@ -228,6 +276,7 @@ class FlowSequential(nn.Sequential):
             u, log_abs_det_jacobian = module.inverse(u, y)
             sum_log_abs_det_jacobians = sum_log_abs_det_jacobians + log_abs_det_jacobian
         return u, sum_log_abs_det_jacobians
+
 
 # --------------------
 # Models
@@ -266,7 +315,7 @@ class MADE(nn.Module):
         self.net = []
         for m in masks[1:-1]:
             self.net += [activation_fn, MaskedLinear(hidden_size, hidden_size, m)]
-        self.net += [activation_fn, MaskedLinear(hidden_size, 2 * input_size, masks[-1].repeat(2,1))]
+        self.net += [activation_fn, MaskedLinear(hidden_size, 2 * input_size, masks[-1].repeat(2, 1))]
         self.net = nn.Sequential(*self.net)
 
     @property
@@ -288,7 +337,7 @@ class MADE(nn.Module):
         # run through reverse model
         for i in self.input_degrees:
             m, loga = self.net(self.net_input(x, y)).chunk(chunks=2, dim=1)
-            x[:,i] = u[:,i] * torch.exp(loga[:,i]) + m[:,i]
+            x[:, i] = u[:, i] * torch.exp(loga[:, i]) + m[:, i]
         log_abs_det_jacobian = loga
         return x, log_abs_det_jacobian
 
@@ -299,6 +348,7 @@ class MADE(nn.Module):
 
 class MADEMOG(nn.Module):
     """ Mixture of Gaussians MADE """
+
     def __init__(self, n_components, input_size, hidden_size, n_hidden, cond_label_size=None, activation='relu', input_order='sequential', input_degrees=None):
         """
         Args:
@@ -334,7 +384,7 @@ class MADEMOG(nn.Module):
         self.net = []
         for m in masks[1:-1]:
             self.net += [activation_fn, MaskedLinear(hidden_size, hidden_size, m)]
-        self.net += [activation_fn, MaskedLinear(hidden_size, n_components * 3 * input_size, masks[-1].repeat(n_components * 3,1))]
+        self.net += [activation_fn, MaskedLinear(hidden_size, n_components * 3 * input_size, masks[-1].repeat(n_components * 3, 1))]
         self.net = nn.Sequential(*self.net)
 
     @property
@@ -367,11 +417,11 @@ class MADEMOG(nn.Module):
             m, loga, logr = self.net(self.net_input(x, y)).view(N, C, 3 * L).chunk(chunks=3, dim=-1)  # out 3 x (N, C, L)
             # normalize cluster responsibilities and sample cluster assignments from a categorical dist
             logr = logr - logr.logsumexp(1, keepdim=True)  # out (N, C, L)
-            z = D.Categorical(logits=logr[:,:,i]).sample().unsqueeze(-1)  # out (N, 1)
-            u_z = torch.gather(u[:,:,i], 1, z).squeeze()  # out (N, 1)
-            m_z = torch.gather(m[:,:,i], 1, z).squeeze()  # out (N, 1)
-            loga_z = torch.gather(loga[:,:,i], 1, z).squeeze()
-            x[:,i] = u_z * torch.exp(loga_z) + m_z
+            z = D.Categorical(logits=logr[:, :, i]).sample().unsqueeze(-1)  # out (N, 1)
+            u_z = torch.gather(u[:, :, i], 1, z).squeeze()  # out (N, 1)
+            m_z = torch.gather(m[:, :, i], 1, z).squeeze()  # out (N, 1)
+            loga_z = torch.gather(loga[:, :, i], 1, z).squeeze()
+            x[:, i] = u_z * torch.exp(loga_z) + m_z
         log_abs_det_jacobian = loga
         return x, log_abs_det_jacobian
 
@@ -416,6 +466,7 @@ class MAF(nn.Module):
 
 class MAFMOG(nn.Module):
     """ MAF on mixture of gaussian MADE """
+
     def __init__(self, n_blocks, n_components, input_size, hidden_size, n_hidden, cond_label_size=None, activation='relu',
                  input_order='sequential', batch_norm=True):
         super().__init__()
@@ -425,7 +476,7 @@ class MAFMOG(nn.Module):
 
         self.maf = MAF(n_blocks, input_size, hidden_size, n_hidden, cond_label_size, activation, input_order, batch_norm)
         # get reversed input order from the last layer (note in maf model, input_degrees are already flipped in for-loop model constructor
-        input_degrees = self.maf.input_degrees#.flip(0)
+        input_degrees = self.maf.input_degrees  # .flip(0)
         self.mademog = MADEMOG(n_components, input_size, hidden_size, n_hidden, cond_label_size, activation, input_order, input_degrees)
 
     @property
@@ -463,6 +514,7 @@ class RealNVP(nn.Module):
         modules = []
         mask = torch.arange(input_size).float() % 2
         for i in range(n_blocks):
+            print(i)
             modules += [LinearMaskedCoupling(input_size, hidden_size, n_hidden, mask, cond_label_size)]
             mask = 1 - mask
             modules += batch_norm * [BatchNorm(input_size)]
@@ -483,22 +535,41 @@ class RealNVP(nn.Module):
         u, sum_log_abs_det_jacobians = self.forward(x, y)
         return torch.sum(self.base_dist.log_prob(u) + sum_log_abs_det_jacobians, dim=1)
 
+    def input_log_prob(self, x, y=None):
+        u, sum_log_abs_det_jacobians = self.forward(x, y)
+        return self.base_dist.log_prob(u) + sum_log_abs_det_jacobians
+
 
 # --------------------
 # Train and evaluate
 # --------------------
 
 def train(model, dataloader, optimizer, epoch, args):
+    encoder = loadEncoder()
+    encoder.eval()
 
     for i, data in enumerate(dataloader):
+
         model.train()
 
         # check if labeled dataset
+        if i == len(dataloader) - 1:
+            break
         if len(data) == 1:
             x, y = data[0], None
         else:
             x, y = data
             y = y.to(args.device)
+
+        x = x.cuda()
+
+        if args.use_encoder:
+            _, _, x = encoder.module.forward_SSMA(x)
+            # x = F.interpolate(x, size=(32, 32), mode='bilinear', align_corners=True)
+
+        # TODO check if this is correct to take only one channel
+        if args.channel > 0:
+            x = x[:, args.channel, :, :].unsqueeze(1)
         x = x.view(x.shape[0], -1).to(args.device)
 
         loss = - model.log_prob(x, y if args.cond_label_size else None).mean(0)
@@ -507,49 +578,98 @@ def train(model, dataloader, optimizer, epoch, args):
         loss.backward()
         optimizer.step()
 
-        if i % args.log_interval == 0:
-            print('epoch {:3d} / {}, step {:4d} / {}; loss {:.4f}'.format(
-                epoch, args.start_epoch + args.n_epochs, i, len(dataloader), loss.item()))
+        # return
+
+        # if i % args.log_interval == 0:
+        print('epoch {:3d} / {}, step {:4d} / {}; loss {:.4f}'.format(
+            epoch, args.start_epoch + args.n_epochs, i, len(dataloader), loss.item()))
+
 
 @torch.no_grad()
 def evaluate(model, dataloader, epoch, args):
     model.eval()
+    encoder = loadEncoder()
+    encoder.eval()
+    sum_mean = 0
+    sum_std = 0
 
-    # conditional model
-    if args.cond_label_size is not None:
-        logprior = torch.tensor(1 / args.cond_label_size).log().to(args.device)
-        loglike = [[] for _ in range(args.cond_label_size)]
+    all_imgs = []
+    all_probs = []
 
-        for i in range(args.cond_label_size):
-            # make one-hot labels
-            labels = torch.zeros(args.batch_size, args.cond_label_size).to(args.device)
-            labels[:,i] = 1
+    for t in dataloader:
+        with torch.no_grad():
+            # conditional model
+            if args.cond_label_size is not None:
+                logprior = torch.tensor(1 / args.cond_label_size).log().to(args.device)
+                loglike = [[] for _ in range(args.cond_label_size)]
 
-            for x, y in dataloader:
-                x = x.view(x.shape[0], -1).to(args.device)
-                loglike[i].append(model.log_prob(x, labels))
+                for i in range(args.cond_label_size):
+                    # make one-hot labels
+                    labels = torch.zeros(args.batch_size, args.cond_label_size).to(args.device)
+                    labels[:, i] = 1
 
-            loglike[i] = torch.cat(loglike[i], dim=0)   # cat along data dim under this label
-        loglike = torch.stack(loglike, dim=1)           # cat all data along label dim
+                    for x, y in t:
+                        x = x.view(x.shape[0], -1).to(args.device)
+                        loglike[i].append(model.log_prob(x, labels))
 
-        # log p(x) = log ∑_y p(x,y) = log ∑_y p(x|y)p(y)
-        # assume uniform prior      = log p(y) ∑_y p(x|y) = log p(y) + log ∑_y p(x|y)
-        logprobs = logprior + loglike.logsumexp(dim=1)
-        # TODO -- measure accuracy as argmax of the loglike
+                    loglike[i] = torch.cat(loglike[i], dim=0)  # cat along data dim under this label
+                loglike = torch.stack(loglike, dim=1)  # cat all data along label dim
 
-    # unconditional model
-    else:
-        logprobs = []
-        for data in dataloader:
-            x = data[0].view(data[0].shape[0], -1).to(args.device)
-            logprobs.append(model.log_prob(x))
-        logprobs = torch.cat(logprobs, dim=0).to(args.device)
+                # log p(x) = log ∑_y p(x,y) = log ∑_y p(x|y)p(y)
+                # assume uniform prior      = log p(y) ∑_y p(x|y) = log p(y) + log ∑_y p(x|y)
+                logprobs = logprior + loglike.logsumexp(dim=1)
+                # TODO -- measure accuracy as argmax of the loglike
 
-    logprob_mean, logprob_std = logprobs.mean(0), 2 * logprobs.var(0).sqrt() / math.sqrt(len(dataloader.dataset))
-    output = 'Evaluate ' + (epoch != None)*'(epoch {}) -- '.format(epoch) + 'logp(x) = {:.3f} +/- {:.3f}'.format(logprob_mean, logprob_std)
-    print(output)
-    print(output, file=open(args.results_file, 'a'))
-    return logprob_mean, logprob_std
+            # unconditional model
+            else:
+                logprobs = []
+                input_logprobs = []
+                for data in t:
+                    x = data[0].cuda()
+                    if args.use_encoder:
+                        _, _, x = encoder.module.forward_SSMA(x)
+                        # x = F.interpolate(x, size=(32, 32), mode='bilinear', align_corners=True)
+
+                    # TODO check if this is correct to take only one channel
+                    if args.channel > 0:
+                        x = x[:, args.channel, :, :].unsqueeze(1)
+
+                    og_shape = x.shape
+                    x = x.view(x.shape[0], -1).to(args.device)
+                    # x = torch.zeros(x.shape).to(args.device)
+
+                    logprobs.append(model.log_prob(x))
+                    input_logprob = -model.input_log_prob(x).view(og_shape)
+                    # import ipdb; ipdb.set_trace()
+                    input_logprob = F.interpolate(input_logprob, size=data[0].shape[2:], mode='bilinear', align_corners=True)
+                    input_logprobs.append(input_logprob)
+                    break
+                logprobs = torch.cat(logprobs, dim=0).to(args.device)
+                input_logprobs = torch.cat(input_logprobs, dim=0).to(args.device)
+                # import ipdb;ipdb.set_trace()
+
+            logprob_mean, logprob_std = logprobs.mean(0), 2 * logprobs.var(0).sqrt() / math.sqrt(len(t.dataset))
+            output = 'Evaluate ' + (epoch != None) * '(epoch {}) -- '.format(epoch) + 'logp(x) = {:.3f} +/- {:.3f}'.format(logprob_mean, logprob_std)
+            print(output)
+            print(output, file=open(args.results_file, 'a'))
+
+            samples = input_logprobs.min(1)[0].view(-1, 1, *data[0].shape[2:])
+
+            all_probs.append(samples)
+            all_imgs.append(data[0].cuda())
+
+            # import ipdb;
+            # ipdb.set_trace()
+            sum_mean += logprob_mean
+            sum_std += logprob_std
+
+
+    all_probs = torch.cat(all_probs)
+    all_imgs = torch.cat(all_imgs)
+    save_image(all_probs, os.path.join(args.output_dir, (t.dataset.name) + "samples.png"), nrow=args.batch_size, normalize=True)
+    save_image(all_imgs, os.path.join(args.output_dir, (t.dataset.name) + "images.png"), nrow=args.batch_size, normalize=True)
+    return sum_mean, logprob_std
+
 
 @torch.no_grad()
 def generate(model, dataset_lam, args, step=None, n_row=10):
@@ -572,7 +692,7 @@ def generate(model, dataset_lam, args, step=None, n_row=10):
 
     # unconditional model
     else:
-        u = model.base_dist.sample((n_row**2, args.n_components)).squeeze()
+        u = model.base_dist.sample((n_row ** 2, args.n_components)).squeeze()
         samples, _ = model.inverse(u)
         log_probs = model.log_prob(samples).sort(0)[1].flip(0)  # sort by log_prob; take argsort idxs; flip high to low
         samples = samples[log_probs]
@@ -580,8 +700,9 @@ def generate(model, dataset_lam, args, step=None, n_row=10):
     # convert and save images
     samples = samples.view(samples.shape[0], *args.input_dims)
     samples = (torch.sigmoid(samples) - dataset_lam) / (1 - 2 * dataset_lam)
-    filename = 'generated_samples' + (step != None)*'_epoch_{}'.format(step) + '.png'
+    filename = 'generated_samples' + (step != None) * '_epoch_{}'.format(step) + '.png'
     save_image(samples, os.path.join(args.output_dir, filename), nrow=n_row, normalize=True)
+
 
 def train_and_evaluate(model, train_loader, test_loader, optimizer, args):
     best_eval_logprob = float('-inf')
@@ -594,7 +715,7 @@ def train_and_evaluate(model, train_loader, test_loader, optimizer, args):
         torch.save({'epoch': i,
                     'model_state': model.state_dict(),
                     'optimizer_state': optimizer.state_dict()},
-                    os.path.join(args.output_dir, 'model_checkpoint.pt'))
+                   os.path.join(args.output_dir, 'model_checkpoint.pt'))
         # save model only
         torch.save(model.state_dict(), os.path.join(args.output_dir, 'model_state.pt'))
 
@@ -604,13 +725,14 @@ def train_and_evaluate(model, train_loader, test_loader, optimizer, args):
             torch.save({'epoch': i,
                         'model_state': model.state_dict(),
                         'optimizer_state': optimizer.state_dict()},
-                        os.path.join(args.output_dir, 'best_model_checkpoint.pt'))
+                       os.path.join(args.output_dir, "best_model.pt", ))
 
         # plot sample
         if args.dataset == 'TOY':
             plot_sample_and_density(model, train_loader.dataset.base_dist, args, step=i)
         if args.dataset == 'MNIST':
             generate(model, train_loader.dataset.lam, args, step=i)
+
 
 # --------------------
 # Plot
@@ -630,7 +752,7 @@ def plot_density(dist, ax, ranges, flip_var_order=False):
 
     # run uniform grid through model and plot
     density = dist.log_prob(xy).exp()
-    ax.contour(xx, yy, density.view(n,n).data.numpy())
+    ax.contour(xx, yy, density.view(n, n).data.numpy())
 
     # format
     ax.set_xlim(xmin, xmax)
@@ -638,8 +760,9 @@ def plot_density(dist, ax, ranges, flip_var_order=False):
     ax.set_xticks([xmin, xmax])
     ax.set_yticks([ymin, ymax])
 
+
 def plot_dist_sample(data, ax, ranges):
-    ax.scatter(data[:,0].data.numpy(), data[:,1].data.numpy(), s=10, alpha=0.4)
+    ax.scatter(data[:, 0].data.numpy(), data[:, 1].data.numpy(), s=10, alpha=0.4)
     # format
     (xmin, xmax), (ymin, ymax) = ranges
     ax.set_xlim(xmin, xmax)
@@ -647,9 +770,10 @@ def plot_dist_sample(data, ax, ranges):
     ax.set_xticks([xmin, xmax])
     ax.set_yticks([ymin, ymax])
 
-def plot_sample_and_density(model, target_dist, args, ranges_density=[[-5,20],[-10,10]], ranges_sample=[[-4,4],[-4,4]], step=None):
+
+def plot_sample_and_density(model, target_dist, args, ranges_density=[[-5, 20], [-10, 10]], ranges_sample=[[-4, 4], [-4, 4]], step=None):
     model.eval()
-    fig, axs = plt.subplots(1, 2, figsize=(6,3))
+    fig, axs = plt.subplots(1, 2, figsize=(6, 3))
 
     # sample target distribution and pass through model
     data = target_dist.sample((2000,))
@@ -662,9 +786,8 @@ def plot_sample_and_density(model, target_dist, args, ranges_density=[[-5,20],[-
     # format and save
     matplotlib.rcParams.update({'xtick.labelsize': 'xx-small', 'ytick.labelsize': 'xx-small'})
     plt.tight_layout()
-    plt.savefig(os.path.join(args.output_dir, 'sample' + (step != None)*'_epoch_{}'.format(step) + '.png'))
+    plt.savefig(os.path.join(args.output_dir, 'sample' + (step != None) * '_epoch_{}'.format(step) + '.png'))
     plt.close()
-
 
 
 # --------------------
@@ -672,8 +795,10 @@ def plot_sample_and_density(model, target_dist, args, ranges_density=[[-5,20],[-
 # --------------------
 
 if __name__ == '__main__':
+    loadEncoder()
 
     args = parser.parse_args()
+    args.output_dir += 'encoder{}_channel{}_nblocks{}/'.format(args.use_encoder, args.channel, args.n_blocks)
 
     # setup file ops
     if not os.path.isdir(args.output_dir):
@@ -687,7 +812,7 @@ if __name__ == '__main__':
     # load data
     if args.conditional: assert args.dataset in ['MNIST', 'CIFAR10'], 'Conditional inputs only available for labeled datasets MNIST and CIFAR10.'
     train_dataloader, test_dataloader = fetch_dataloaders(args.dataset, args.batch_size, args.device, args.flip_toy_var_order)
-    args.input_size = train_dataloader.dataset.input_size
+    args.input_size = args.input_size or train_dataloader.dataset.input_size
     args.input_dims = train_dataloader.dataset.input_dims
     args.cond_label_size = train_dataloader.dataset.label_size if args.conditional else None
 
@@ -698,15 +823,15 @@ if __name__ == '__main__':
     elif args.model == 'mademog':
         assert args.n_components > 1, 'Specify more than 1 component for mixture of gaussians models.'
         model = MADEMOG(args.n_components, args.input_size, args.hidden_size, args.n_hidden, args.cond_label_size,
-                     args.activation_fn, args.input_order)
+                        args.activation_fn, args.input_order)
     elif args.model == 'maf':
         model = MAF(args.n_blocks, args.input_size, args.hidden_size, args.n_hidden, args.cond_label_size,
                     args.activation_fn, args.input_order, batch_norm=not args.no_batch_norm)
     elif args.model == 'mafmog':
         assert args.n_components > 1, 'Specify more than 1 component for mixture of gaussians models.'
         model = MAFMOG(args.n_blocks, args.n_components, args.input_size, args.hidden_size, args.n_hidden, args.cond_label_size,
-                    args.activation_fn, args.input_order, batch_norm=not args.no_batch_norm)
-    elif args.model =='realnvp':
+                       args.activation_fn, args.input_order, batch_norm=not args.no_batch_norm)
+    elif args.model == 'realnvp':
         model = RealNVP(args.n_blocks, args.input_size, args.hidden_size, args.n_hidden, args.cond_label_size,
                         batch_norm=not args.no_batch_norm)
     else:
@@ -715,33 +840,33 @@ if __name__ == '__main__':
     model = model.to(args.device)
     optimizer = torch.optim.Adam(model.parameters(), lr=args.lr, weight_decay=1e-6)
 
-    if args.restore_file:
-        # load model and optimizer states
-        state = torch.load(args.restore_file, map_location=args.device)
-        model.load_state_dict(state['model_state'])
-        optimizer.load_state_dict(state['optimizer_state'])
-        args.start_epoch = state['epoch'] + 1
-        # set up paths
-        args.output_dir = os.path.dirname(args.restore_file)
-    args.results_file = os.path.join(args.output_dir, args.results_file)
+    # if not args.train:
+    #     # load model and optimizer states
+    #     state = torch.load(os.path.join(args.output_dir, "best_model.pt"), map_location=args.device)
+    #     model.load_state_dict(state['model_state'])
+    #     optimizer.load_state_dict(state['optimizer_state'])
+    #     args.start_epoch = state['epoch'] + 1
+    #     del state
+    #     args.results_file = os.path.join(args.output_dir, args.results_file)
 
     print('Loaded settings and model:')
     print(pprint.pformat(args.__dict__))
     print(model)
     print(pprint.pformat(args.__dict__), file=open(args.results_file, 'a'))
     print(model, file=open(args.results_file, 'a'))
-
+    torch.cuda.empty_cache()
     if args.train:
         train_and_evaluate(model, train_dataloader, test_dataloader, optimizer, args)
-
-    if args.evaluate:
+    else:
         evaluate(model, test_dataloader, None, args)
+    # evaluate(model, train_dataloader, None, args)
 
     if args.generate:
         if args.dataset == 'TOY':
             base_dist = train_dataloader.dataset.base_dist
-            plot_sample_and_density(model, base_dist, args, ranges_density=[[-15,4],[-3,3]], ranges_sample=[[-1.5,1.5],[-3,3]])
-        elif args.dataset == 'MNIST':
-            generate(model, train_dataloader.dataset.lam, args)
+            plot_sample_and_density(model, base_dist, args, ranges_density=[[-15, 4], [-3, 3]], ranges_sample=[[-1.5, 1.5], [-3, 3]])
+        elif args.dataset == 'MNIST': \
+                generate(model, train_dataloader.dataset.lam, args)
+        # -843437.375
 
-
+        # -323450.000

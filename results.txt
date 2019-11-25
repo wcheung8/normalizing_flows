@@ -1,0 +1,2822 @@
+{'activation_fn': 'relu',
+ 'batch_size': 4,
+ 'channel': -1,
+ 'cond_label_size': None,
+ 'conditional': False,
+ 'data_dir': './data/',
+ 'dataset': '',
+ 'device': device(type='cuda', index=0),
+ 'flip_toy_var_order': False,
+ 'generate': False,
+ 'hidden_size': 64,
+ 'input_dims': torch.Size([3, 128, 128]),
+ 'input_order': 'random',
+ 'input_size': 49152,
+ 'log_interval': 1000,
+ 'lr': 0.0001,
+ 'model': 'realnvp',
+ 'n_blocks': 32,
+ 'n_components': 1,
+ 'n_epochs': 50,
+ 'n_hidden': 1,
+ 'no_batch_norm': False,
+ 'no_cuda': False,
+ 'output_dir': './results/mafencoderFalse_channel-1_nblocks32/',
+ 'restore_file': None,
+ 'results_file': 'results.txt',
+ 'seed': 1,
+ 'start_epoch': 0,
+ 'train': True,
+ 'use_encoder': False}
+RealNVP(
+  (net): FlowSequential(
+    (0): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+    )
+    (1): BatchNorm()
+    (2): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+    )
+    (3): BatchNorm()
+    (4): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+    )
+    (5): BatchNorm()
+    (6): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+    )
+    (7): BatchNorm()
+    (8): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+    )
+    (9): BatchNorm()
+    (10): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+    )
+    (11): BatchNorm()
+    (12): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+    )
+    (13): BatchNorm()
+    (14): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+    )
+    (15): BatchNorm()
+    (16): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+    )
+    (17): BatchNorm()
+    (18): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+    )
+    (19): BatchNorm()
+    (20): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+    )
+    (21): BatchNorm()
+    (22): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+    )
+    (23): BatchNorm()
+    (24): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+    )
+    (25): BatchNorm()
+    (26): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+    )
+    (27): BatchNorm()
+    (28): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+    )
+    (29): BatchNorm()
+    (30): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+    )
+    (31): BatchNorm()
+    (32): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+    )
+    (33): BatchNorm()
+    (34): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+    )
+    (35): BatchNorm()
+    (36): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+    )
+    (37): BatchNorm()
+    (38): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+    )
+    (39): BatchNorm()
+    (40): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+    )
+    (41): BatchNorm()
+    (42): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+    )
+    (43): BatchNorm()
+    (44): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+    )
+    (45): BatchNorm()
+    (46): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+    )
+    (47): BatchNorm()
+    (48): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+    )
+    (49): BatchNorm()
+    (50): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+    )
+    (51): BatchNorm()
+    (52): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+    )
+    (53): BatchNorm()
+    (54): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+    )
+    (55): BatchNorm()
+    (56): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+    )
+    (57): BatchNorm()
+    (58): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+    )
+    (59): BatchNorm()
+    (60): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+    )
+    (61): BatchNorm()
+    (62): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+    )
+    (63): BatchNorm()
+  )
+)
+{'activation_fn': 'relu',
+ 'batch_size': 4,
+ 'channel': -1,
+ 'cond_label_size': None,
+ 'conditional': False,
+ 'data_dir': './data/',
+ 'dataset': '',
+ 'device': device(type='cuda', index=0),
+ 'flip_toy_var_order': False,
+ 'generate': False,
+ 'hidden_size': 64,
+ 'input_dims': torch.Size([3, 128, 128]),
+ 'input_order': 'random',
+ 'input_size': 65536,
+ 'log_interval': 1000,
+ 'lr': 0.0001,
+ 'model': 'realnvp',
+ 'n_blocks': 32,
+ 'n_components': 1,
+ 'n_epochs': 50,
+ 'n_hidden': 1,
+ 'no_batch_norm': False,
+ 'no_cuda': False,
+ 'output_dir': './results/mafencoderTrue_channel-1_nblocks32/',
+ 'restore_file': None,
+ 'results_file': 'results.txt',
+ 'seed': 1,
+ 'start_epoch': 0,
+ 'train': True,
+ 'use_encoder': True}
+RealNVP(
+  (net): FlowSequential(
+    (0): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+    )
+    (1): BatchNorm()
+    (2): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+    )
+    (3): BatchNorm()
+    (4): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+    )
+    (5): BatchNorm()
+    (6): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+    )
+    (7): BatchNorm()
+    (8): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+    )
+    (9): BatchNorm()
+    (10): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+    )
+    (11): BatchNorm()
+    (12): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+    )
+    (13): BatchNorm()
+    (14): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+    )
+    (15): BatchNorm()
+    (16): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+    )
+    (17): BatchNorm()
+    (18): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+    )
+    (19): BatchNorm()
+    (20): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+    )
+    (21): BatchNorm()
+    (22): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+    )
+    (23): BatchNorm()
+    (24): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+    )
+    (25): BatchNorm()
+    (26): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+    )
+    (27): BatchNorm()
+    (28): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+    )
+    (29): BatchNorm()
+    (30): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+    )
+    (31): BatchNorm()
+    (32): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+    )
+    (33): BatchNorm()
+    (34): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+    )
+    (35): BatchNorm()
+    (36): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+    )
+    (37): BatchNorm()
+    (38): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+    )
+    (39): BatchNorm()
+    (40): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+    )
+    (41): BatchNorm()
+    (42): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+    )
+    (43): BatchNorm()
+    (44): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+    )
+    (45): BatchNorm()
+    (46): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+    )
+    (47): BatchNorm()
+    (48): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+    )
+    (49): BatchNorm()
+    (50): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+    )
+    (51): BatchNorm()
+    (52): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+    )
+    (53): BatchNorm()
+    (54): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+    )
+    (55): BatchNorm()
+    (56): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+    )
+    (57): BatchNorm()
+    (58): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+    )
+    (59): BatchNorm()
+    (60): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+    )
+    (61): BatchNorm()
+    (62): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+    )
+    (63): BatchNorm()
+  )
+)
+Evaluate (epoch 0) -- logp(x) = -82207.102 +/- 459.265
+Evaluate (epoch 0) -- logp(x) = -131263192.000 +/- 2208194.500
+Evaluate (epoch 0) -- logp(x) = -3023682.750 +/- 397858.000
+Evaluate (epoch 0) -- logp(x) = -294254208.000 +/- 4687390.000
+Evaluate (epoch 0) -- logp(x) = -79395.578 +/- 42.422
+Evaluate (epoch 0) -- logp(x) = 83021.586 +/- 656.738
+Evaluate (epoch 0) -- logp(x) = 71503.078 +/- 248.118
+Evaluate (epoch 0) -- logp(x) = 74072.016 +/- 425.665
+Evaluate (epoch 0) -- logp(x) = 25837.363 +/- 651.272
+Evaluate (epoch 0) -- logp(x) = 95974.594 +/- 50.153
+Evaluate (epoch 1) -- logp(x) = -89397.938 +/- 80.106
+Evaluate (epoch 1) -- logp(x) = -7406126.000 +/- 235931.719
+Evaluate (epoch 1) -- logp(x) = -620746.688 +/- 50056.090
+Evaluate (epoch 1) -- logp(x) = -16257731.000 +/- 190415.109
+Evaluate (epoch 1) -- logp(x) = -505366.125 +/- 3096.836
+Evaluate (epoch 1) -- logp(x) = 85899.883 +/- 1428.647
+Evaluate (epoch 1) -- logp(x) = 72979.844 +/- 471.298
+Evaluate (epoch 1) -- logp(x) = 80368.750 +/- 365.750
+Evaluate (epoch 1) -- logp(x) = -20188.281 +/- 1521.552
+Evaluate (epoch 1) -- logp(x) = 97909.859 +/- 250.353
+Evaluate (epoch 2) -- logp(x) = -12219396.000 +/- 696553.250
+Evaluate (epoch 2) -- logp(x) = -172379840.000 +/- 7220226.500
+Evaluate (epoch 2) -- logp(x) = -51908768.000 +/- 5040876.000
+Evaluate (epoch 2) -- logp(x) = -374297088.000 +/- 4367574.500
+Evaluate (epoch 2) -- logp(x) = -148571904.000 +/- 324932.344
+Evaluate (epoch 2) -- logp(x) = 89454.156 +/- 382.405
+Evaluate (epoch 2) -- logp(x) = 77271.781 +/- 302.994
+Evaluate (epoch 2) -- logp(x) = 77592.469 +/- 295.558
+Evaluate (epoch 2) -- logp(x) = -25656.855 +/- 3529.824
+Evaluate (epoch 2) -- logp(x) = 92066.898 +/- 606.670
+Evaluate (epoch 3) -- logp(x) = -76666432.000 +/- 15206084.000
+Evaluate (epoch 3) -- logp(x) = -452998.125 +/- 52496.145
+Evaluate (epoch 3) -- logp(x) = -169643.250 +/- 136.894
+Evaluate (epoch 3) -- logp(x) = -7856779264.000 +/- 491251648.000
+Evaluate (epoch 3) -- logp(x) = -935420032.000 +/- 6904864.000
+Evaluate (epoch 3) -- logp(x) = 83827.391 +/- 198.117
+Evaluate (epoch 3) -- logp(x) = 74157.641 +/- 100.768
+Evaluate (epoch 3) -- logp(x) = 76571.812 +/- 139.487
+Evaluate (epoch 3) -- logp(x) = -3601539.500 +/- 102227.125
+Evaluate (epoch 3) -- logp(x) = 84030.906 +/- 136.800
+Evaluate (epoch 4) -- logp(x) = -239688.500 +/- 79.498
+Evaluate (epoch 4) -- logp(x) = -245726.406 +/- 73.599
+Evaluate (epoch 4) -- logp(x) = -241776.266 +/- 37.833
+Evaluate (epoch 4) -- logp(x) = -251232.000 +/- 28.767
+Evaluate (epoch 4) -- logp(x) = -241909.250 +/- 1.304
+Evaluate (epoch 4) -- logp(x) = 64271.555 +/- 374.232
+Evaluate (epoch 4) -- logp(x) = 55297.492 +/- 47.771
+Evaluate (epoch 4) -- logp(x) = 57616.180 +/- 191.570
+Evaluate (epoch 4) -- logp(x) = -4051482.000 +/- 96626.234
+Evaluate (epoch 4) -- logp(x) = 68156.430 +/- 45.529
+Evaluate (epoch 5) -- logp(x) = -259886.812 +/- 172.911
+Evaluate (epoch 5) -- logp(x) = -269640.500 +/- 37.312
+Evaluate (epoch 5) -- logp(x) = -263842.969 +/- 226.087
+Evaluate (epoch 5) -- logp(x) = -269955.375 +/- 41.946
+Evaluate (epoch 5) -- logp(x) = -261607.641 +/- 31.590
+Evaluate (epoch 5) -- logp(x) = 38550.516 +/- 348.107
+Evaluate (epoch 5) -- logp(x) = 33501.078 +/- 123.984
+Evaluate (epoch 5) -- logp(x) = 34812.109 +/- 145.945
+Evaluate (epoch 5) -- logp(x) = -4186460.500 +/- 266395.188
+Evaluate (epoch 6) -- logp(x) = -278823.000 +/- 86.952
+Evaluate (epoch 5) -- logp(x) = 39016.359 +/- 26.126
+Evaluate (epoch 6) -- logp(x) = -19251422.000 +/- 1843446.000
+Evaluate (epoch 6) -- logp(x) = -282751.188 +/- 390.521
+Evaluate (epoch 6) -- logp(x) = -2297417.500 +/- 191128.672
+Evaluate (epoch 6) -- logp(x) = -284459.656 +/- 6.281
+Evaluate (epoch 7) -- logp(x) = -219811.656 +/- 143.368
+Evaluate (epoch 7) -- logp(x) = -1004067584.000 +/- 73284632.000
+Evaluate (epoch 7) -- logp(x) = -232470.172 +/- 240.605
+Evaluate (epoch 7) -- logp(x) = -6835155968.000 +/- 604138752.000
+Evaluate (epoch 7) -- logp(x) = -228696.906 +/- 44.691
+Evaluate (epoch 6) -- logp(x) = 17865.867 +/- 877.226
+Evaluate (epoch 6) -- logp(x) = 3446.576 +/- 819.408
+Evaluate (epoch 6) -- logp(x) = 20513.270 +/- 52.533
+Evaluate (epoch 6) -- logp(x) = -679826624.000 +/- 14396714.000
+Evaluate (epoch 6) -- logp(x) = -2211.589 +/- 1480.506
+Evaluate (epoch 8) -- logp(x) = -238056.719 +/- 206.233
+Evaluate (epoch 8) -- logp(x) = -241033.703 +/- 346.711
+Evaluate (epoch 8) -- logp(x) = -243738.938 +/- 642.612
+Evaluate (epoch 8) -- logp(x) = -271508.719 +/- 1765.865
+Evaluate (epoch 8) -- logp(x) = -254169.469 +/- 315.473
+Evaluate (epoch 7) -- logp(x) = -3471.742 +/- 1135.995
+Evaluate (epoch 7) -- logp(x) = -37714.262 +/- 4212.431
+Evaluate (epoch 7) -- logp(x) = -48298.789 +/- 4643.188
+Evaluate (epoch 7) -- logp(x) = -21081.246 +/- 233.261
+Evaluate (epoch 7) -- logp(x) = 31553.531 +/- 176.108
+Evaluate (epoch 9) -- logp(x) = -667975.812 +/- 77571.758
+Evaluate (epoch 9) -- logp(x) = -266286.562 +/- 442.282
+Evaluate (epoch 9) -- logp(x) = -2374226.750 +/- 170703.797
+Evaluate (epoch 9) -- logp(x) = -279844.281 +/- 1062.715
+Evaluate (epoch 9) -- logp(x) = -288527.625 +/- 3867.873
+Evaluate (epoch 8) -- logp(x) = -4076133.500 +/- 727327.750
+Evaluate (epoch 8) -- logp(x) = -1303462.375 +/- 175927.406
+Evaluate (epoch 8) -- logp(x) = -939545.688 +/- 44748.527
+Evaluate (epoch 8) -- logp(x) = -78175328.000 +/- 11015264.000
+Evaluate (epoch 8) -- logp(x) = -1582428.125 +/- 41587.590
+Evaluate (epoch 10) -- logp(x) = -3215252.750 +/- 585838.688
+Evaluate (epoch 10) -- logp(x) = -282211.688 +/- 737.136
+Evaluate (epoch 10) -- logp(x) = -20414356.000 +/- 3988099.000
+Evaluate (epoch 10) -- logp(x) = -281304.594 +/- 132.423
+Evaluate (epoch 10) -- logp(x) = -272048.688 +/- 105.698
+Evaluate (epoch 9) -- logp(x) = -558074944.000 +/- 32386876.000
+Evaluate (epoch 9) -- logp(x) = -366517120.000 +/- 29207100.000
+Evaluate (epoch 9) -- logp(x) = -1405885184.000 +/- 25684820.000
+Evaluate (epoch 9) -- logp(x) = -63108.633 +/- 267.383
+Evaluate (epoch 9) -- logp(x) = -52477208.000 +/- 2016013.750
+Evaluate (epoch 11) -- logp(x) = -3946160640.000 +/- 784080832.000
+Evaluate (epoch 11) -- logp(x) = -256472.812 +/- 57.928
+Evaluate (epoch 11) -- logp(x) = -603067121664.000 +/- 48637579264.000
+Evaluate (epoch 11) -- logp(x) = -260697.781 +/- 98.104
+Evaluate (epoch 11) -- logp(x) = -258413.906 +/- 1886.032
+Evaluate (epoch 10) -- logp(x) = -913299840.000 +/- 68493952.000
+Evaluate (epoch 10) -- logp(x) = -1615678464.000 +/- 82695336.000
+Evaluate (epoch 10) -- logp(x) = -938846016.000 +/- 39006916.000
+Evaluate (epoch 10) -- logp(x) = -194145.250 +/- 147.750
+Evaluate (epoch 10) -- logp(x) = -7109529.000 +/- 1340153.375
+Evaluate (epoch 12) -- logp(x) = -267436.094 +/- 104.132
+Evaluate (epoch 12) -- logp(x) = -262482.406 +/- 137.698
+Evaluate (epoch 12) -- logp(x) = -293386.625 +/- 3132.841
+Evaluate (epoch 12) -- logp(x) = -269167.562 +/- 178.511
+Evaluate (epoch 12) -- logp(x) = -1212312.625 +/- 20067.346
+Evaluate (epoch 13) -- logp(x) = -319082.375 +/- 88.973
+Evaluate (epoch 13) -- logp(x) = -64222080.000 +/- 4686970.000
+Evaluate (epoch 13) -- logp(x) = -339603.500 +/- 4087.884
+Evaluate (epoch 11) -- logp(x) = -891105600.000 +/- 66695244.000
+Evaluate (epoch 13) -- logp(x) = -4861486.000 +/- 658195.000
+Evaluate (epoch 11) -- logp(x) = -2314432000.000 +/- 197732464.000
+Evaluate (epoch 13) -- logp(x) = -320132.000 +/- 11.236
+Evaluate (epoch 11) -- logp(x) = -2420691456.000 +/- 162898720.000
+Evaluate (epoch 11) -- logp(x) = -2288019.250 +/- 416915.344
+Evaluate (epoch 11) -- logp(x) = -80393664.000 +/- 3959424.250
+Evaluate (epoch 14) -- logp(x) = -325495.344 +/- 43.969
+Evaluate (epoch 14) -- logp(x) = -1228048.500 +/- 181243.016
+Evaluate (epoch 14) -- logp(x) = -327098.125 +/- 305.350
+Evaluate (epoch 14) -- logp(x) = -54171009024.000 +/- 3537461504.000
+Evaluate (epoch 14) -- logp(x) = -326906.500 +/- 6.434
+Evaluate (epoch 12) -- logp(x) = -6866253824.000 +/- 880814464.000
+Evaluate (epoch 12) -- logp(x) = -23665537024.000 +/- 1878559872.000
+Evaluate (epoch 12) -- logp(x) = -15296518144.000 +/- 1094195200.000
+Evaluate (epoch 12) -- logp(x) = -896777.812 +/- 105075.117
+Evaluate (epoch 12) -- logp(x) = -2429976320.000 +/- 482916704.000
+Evaluate (epoch 15) -- logp(x) = -289327.250 +/- 588.039
+Evaluate (epoch 15) -- logp(x) = -2163602688.000 +/- 401910560.000
+Evaluate (epoch 15) -- logp(x) = -15212570.000 +/- 2955314.250
+Evaluate (epoch 15) -- logp(x) = -21775407104.000 +/- 455918496.000
+Evaluate (epoch 15) -- logp(x) = -290058.312 +/- 10.821
+Evaluate (epoch 13) -- logp(x) = -177050.188 +/- 162.690
+Evaluate (epoch 13) -- logp(x) = -55457888.000 +/- 5921884.500
+Evaluate (epoch 13) -- logp(x) = -178056.844 +/- 62.802
+Evaluate (epoch 13) -- logp(x) = -272652.625 +/- 19155.100
+Evaluate (epoch 13) -- logp(x) = -45501980.000 +/- 366745.188
+Evaluate (epoch 16) -- logp(x) = -314781.000 +/- 115.088
+Evaluate (epoch 16) -- logp(x) = -496661.094 +/- 32317.529
+Evaluate (epoch 16) -- logp(x) = -1152057.250 +/- 165351.609
+Evaluate (epoch 16) -- logp(x) = -1988189696.000 +/- 45173396.000
+Evaluate (epoch 16) -- logp(x) = -318386.438 +/- 9.172
+Evaluate (epoch 14) -- logp(x) = -668384.938 +/- 106469.094
+Evaluate (epoch 14) -- logp(x) = -23137689600.000 +/- 1155204352.000
+Evaluate (epoch 14) -- logp(x) = -16023906304.000 +/- 416431168.000
+Evaluate (epoch 14) -- logp(x) = -70721056.000 +/- 8740098.000
+Evaluate (epoch 14) -- logp(x) = -2230677248.000 +/- 76721280.000
+Evaluate (epoch 17) -- logp(x) = -256824.609 +/- 58.776
+Evaluate (epoch 17) -- logp(x) = -582823968768.000 +/- 63958040576.000
+Evaluate (epoch 17) -- logp(x) = -273884.938 +/- 2637.008
+Evaluate (epoch 17) -- logp(x) = -17920830734336.000 +/- 147518685184.000
+Evaluate (epoch 17) -- logp(x) = -216152604672.000 +/- 1683794304.000
+Evaluate (epoch 15) -- logp(x) = -916406.125 +/- 158547.797
+Evaluate (epoch 15) -- logp(x) = -2798824960.000 +/- 140960016.000
+Evaluate (epoch 15) -- logp(x) = -2358429696.000 +/- 69193248.000
+Evaluate (epoch 15) -- logp(x) = -17213958.000 +/- 2244243.500
+Evaluate (epoch 15) -- logp(x) = -539052544.000 +/- 26101646.000
+Evaluate (epoch 18) -- logp(x) = -370901.125 +/- 107.820
+Evaluate (epoch 18) -- logp(x) = -474995.312 +/- 21814.982
+Evaluate (epoch 18) -- logp(x) = -369833.938 +/- 363.974
+Evaluate (epoch 18) -- logp(x) = -3413017.750 +/- 137044.656
+Evaluate (epoch 18) -- logp(x) = -371208.188 +/- 8.171
+Evaluate (epoch 16) -- logp(x) = -58403602432.000 +/- 11426875392.000
+Evaluate (epoch 16) -- logp(x) = -100776712.000 +/- 9310182.000
+Evaluate (epoch 16) -- logp(x) = -23891760.000 +/- 1902909.250
+Evaluate (epoch 16) -- logp(x) = -6568978.500 +/- 780128.375
+Evaluate (epoch 16) -- logp(x) = -114901.539 +/- 187.703
+Evaluate (epoch 19) -- logp(x) = -237331.781 +/- 46.793
+Evaluate (epoch 19) -- logp(x) = -864536576.000 +/- 173469136.000
+Evaluate (epoch 19) -- logp(x) = -661070086144.000 +/- 75592343552.000
+Evaluate (epoch 19) -- logp(x) = -38916206592.000 +/- 6293573632.000
+Evaluate (epoch 19) -- logp(x) = -2374128107520.000 +/- 14589892608.000
+Evaluate (epoch 20) -- logp(x) = -294827.812 +/- 12.607
+Evaluate (epoch 20) -- logp(x) = -57837236.000 +/- 11503531.000
+Evaluate (epoch 20) -- logp(x) = -295532.094 +/- 24.217
+Evaluate (epoch 20) -- logp(x) = -197657853952.000 +/- 26434951168.000
+Evaluate (epoch 20) -- logp(x) = -292751.906 +/- 17.967
+Evaluate (epoch 17) -- logp(x) = -137567.531 +/- 230.856
+Evaluate (epoch 17) -- logp(x) = -137274.000 +/- 183.839
+Evaluate (epoch 17) -- logp(x) = -141187.328 +/- 190.964
+Evaluate (epoch 17) -- logp(x) = -16738590.000 +/- 773595.375
+Evaluate (epoch 17) -- logp(x) = -134785.328 +/- 24.156
+Evaluate (epoch 21) -- logp(x) = -248997.438 +/- 25.980
+Evaluate (epoch 21) -- logp(x) = -6081250.000 +/- 1115969.375
+Evaluate (epoch 21) -- logp(x) = -250502.250 +/- 124.074
+Evaluate (epoch 21) -- logp(x) = -49722424.000 +/- 2929125.500
+Evaluate (epoch 21) -- logp(x) = -250648.219 +/- 8.826
+Evaluate (epoch 18) -- logp(x) = -6645587.500 +/- 456339.656
+Evaluate (epoch 18) -- logp(x) = -5964367.000 +/- 676854.688
+Evaluate (epoch 18) -- logp(x) = -32184200.000 +/- 1698606.750
+Evaluate (epoch 18) -- logp(x) = -19852178.000 +/- 3668363.750
+Evaluate (epoch 18) -- logp(x) = -315825.844 +/- 2700.782
+Evaluate (epoch 22) -- logp(x) = -266313.062 +/- 59.329
+Evaluate (epoch 22) -- logp(x) = -3139101.250 +/- 555591.438
+Evaluate (epoch 22) -- logp(x) = -337733.812 +/- 13865.771
+Evaluate (epoch 22) -- logp(x) = -409827328.000 +/- 35091596.000
+Evaluate (epoch 22) -- logp(x) = -268147.781 +/- 7.267
+Evaluate (epoch 19) -- logp(x) = -350632.625 +/- 1323.898
+Evaluate (epoch 19) -- logp(x) = -349774.125 +/- 1273.720
+Evaluate (epoch 19) -- logp(x) = -366660.438 +/- 338.667
+Evaluate (epoch 19) -- logp(x) = -334941.938 +/- 82.743
+Evaluate (epoch 19) -- logp(x) = -330969.875 +/- 13.852
+Evaluate (epoch 23) -- logp(x) = -231712.594 +/- 10.711
+Evaluate (epoch 23) -- logp(x) = -7306716160.000 +/- 1389085056.000
+Evaluate (epoch 23) -- logp(x) = -235469.547 +/- 532.847
+Evaluate (epoch 23) -- logp(x) = -55215947776.000 +/- 797293952.000
+Evaluate (epoch 23) -- logp(x) = -232951.375 +/- 18.793
+Evaluate (epoch 20) -- logp(x) = -636805.250 +/- 45396.766
+Evaluate (epoch 20) -- logp(x) = -135933104.000 +/- 27235780.000
+Evaluate (epoch 20) -- logp(x) = -849682.875 +/- 39093.281
+Evaluate (epoch 20) -- logp(x) = -296648.844 +/- 242.145
+Evaluate (epoch 20) -- logp(x) = -352452672.000 +/- 8760071.000
+Evaluate (epoch 24) -- logp(x) = -8760567267328.000 +/- 673870577664.000
+Evaluate (epoch 24) -- logp(x) = -364623.000 +/- 122.655
+Evaluate (epoch 24) -- logp(x) = -574024581120.000 +/- 96312803328.000
+Evaluate (epoch 24) -- logp(x) = -369229.625 +/- 30.375
+Evaluate (epoch 24) -- logp(x) = -10492416000.000 +/- 906306112.000
+Evaluate (epoch 21) -- logp(x) = -7323467776.000 +/- 647585792.000
+Evaluate (epoch 21) -- logp(x) = -72209848.000 +/- 14436772.000
+Evaluate (epoch 21) -- logp(x) = -9081870336.000 +/- 167219856.000
+Evaluate (epoch 21) -- logp(x) = -205264.188 +/- 348.678
+Evaluate (epoch 21) -- logp(x) = -390744.344 +/- 25049.867
+Evaluate (epoch 25) -- logp(x) = -330822.562 +/- 121.965
+Evaluate (epoch 25) -- logp(x) = -343753.438 +/- 225.779
+Evaluate (epoch 25) -- logp(x) = -348974.125 +/- 563.777
+Evaluate (epoch 25) -- logp(x) = -358396.219 +/- 158.511
+Evaluate (epoch 25) -- logp(x) = -340143.312 +/- 17.478
+Evaluate (epoch 22) -- logp(x) = -8186288.500 +/- 1535427.625
+Evaluate (epoch 22) -- logp(x) = -1764776.500 +/- 201848.031
+Evaluate (epoch 22) -- logp(x) = -12302390.000 +/- 676623.938
+Evaluate (epoch 26) -- logp(x) = -276281.406 +/- 72.388
+Evaluate (epoch 22) -- logp(x) = -244447.531 +/- 4424.554
+Evaluate (epoch 26) -- logp(x) = -137340387328.000 +/- 27571599360.000
+Evaluate (epoch 22) -- logp(x) = -433983.938 +/- 19036.045
+Evaluate (epoch 26) -- logp(x) = -24859590656.000 +/- 3378701568.000
+Evaluate (epoch 26) -- logp(x) = -2894718.500 +/- 70521.977
+Evaluate (epoch 26) -- logp(x) = -1414147866624.000 +/- 249806323712.000
+Evaluate (epoch 27) -- logp(x) = -248082.312 +/- 80.995
+Evaluate (epoch 27) -- logp(x) = -16855824596992.000 +/- 1013014134784.000
+Evaluate (epoch 27) -- logp(x) = -788581711872.000 +/- 86048841728.000
+Evaluate (epoch 27) -- logp(x) = -32020243677184.000 +/- 262540378112.000
+Evaluate (epoch 27) -- logp(x) = -1790339579904.000 +/- 130690424832.000
+Evaluate (epoch 23) -- logp(x) = -4181522.750 +/- 783985.438
+Evaluate (epoch 23) -- logp(x) = -249807.703 +/- 10161.165
+Evaluate (epoch 23) -- logp(x) = -856626.375 +/- 125578.461
+Evaluate (epoch 23) -- logp(x) = -11860566.000 +/- 1826750.250
+Evaluate (epoch 23) -- logp(x) = -358993.375 +/- 5383.517
+Evaluate (epoch 28) -- logp(x) = -262245.406 +/- 29.385
+Evaluate (epoch 28) -- logp(x) = -1102793932800.000 +/- 56868667392.000
+Evaluate (epoch 28) -- logp(x) = -169663496192.000 +/- 32625485824.000
+Evaluate (epoch 28) -- logp(x) = -3746376450048.000 +/- 69319499776.000
+Evaluate (epoch 28) -- logp(x) = -264629.156 +/- 54.342
+Evaluate (epoch 24) -- logp(x) = -185761.906 +/- 132.672
+Evaluate (epoch 24) -- logp(x) = -182486.125 +/- 289.855
+Evaluate (epoch 24) -- logp(x) = -20757176.000 +/- 2163428.250
+Evaluate (epoch 24) -- logp(x) = -3959990.250 +/- 333325.250
+Evaluate (epoch 24) -- logp(x) = -1698051200.000 +/- 323110912.000
+Evaluate (epoch 29) -- logp(x) = -296939.938 +/- 10.502
+Evaluate (epoch 29) -- logp(x) = -1111893.250 +/- 17468.500
+Evaluate (epoch 29) -- logp(x) = -697478.688 +/- 28288.975
+Evaluate (epoch 29) -- logp(x) = -220946656.000 +/- 15136094.000
+Evaluate (epoch 29) -- logp(x) = -295900.750 +/- 31.133
+Evaluate (epoch 25) -- logp(x) = -7203885.000 +/- 1302283.500
+Evaluate (epoch 25) -- logp(x) = -1973275.750 +/- 272997.281
+Evaluate (epoch 25) -- logp(x) = -25568876.000 +/- 1743272.125
+Evaluate (epoch 25) -- logp(x) = -2113130624.000 +/- 417765824.000
+Evaluate (epoch 25) -- logp(x) = -273932.125 +/- 279.932
+Evaluate (epoch 30) -- logp(x) = -228699.234 +/- 37.267
+Evaluate (epoch 30) -- logp(x) = -305251.188 +/- 7392.897
+Evaluate (epoch 30) -- logp(x) = -3522162.000 +/- 583204.750
+Evaluate (epoch 30) -- logp(x) = -30668935168.000 +/- 1298461440.000
+Evaluate (epoch 30) -- logp(x) = -230053.641 +/- 15.703
+Evaluate (epoch 26) -- logp(x) = -904918.875 +/- 70179.414
+Evaluate (epoch 26) -- logp(x) = -699488.375 +/- 45552.762
+Evaluate (epoch 26) -- logp(x) = -28776754.000 +/- 1799312.625
+Evaluate (epoch 26) -- logp(x) = -5508868.000 +/- 632336.062
+Evaluate (epoch 26) -- logp(x) = -291900.500 +/- 506.243
+Evaluate (epoch 31) -- logp(x) = -243114.875 +/- 6.655
+Evaluate (epoch 31) -- logp(x) = -46062900.000 +/- 9183205.000
+Evaluate (epoch 31) -- logp(x) = -454556.562 +/- 22420.098
+Evaluate (epoch 31) -- logp(x) = -10115157590016.000 +/- 814485340160.000
+Evaluate (epoch 31) -- logp(x) = -242788.562 +/- 11.525
+Evaluate (epoch 27) -- logp(x) = -301423.875 +/- 1834.217
+Evaluate (epoch 27) -- logp(x) = -6915598.000 +/- 1330966.750
+Evaluate (epoch 27) -- logp(x) = -310856.719 +/- 1073.816
+Evaluate (epoch 27) -- logp(x) = -503166432.000 +/- 49925840.000
+Evaluate (epoch 27) -- logp(x) = -24555988.000 +/- 1661506.000
+Evaluate (epoch 32) -- logp(x) = -305712.250 +/- 36.679
+Evaluate (epoch 32) -- logp(x) = -311730.875 +/- 244.798
+Evaluate (epoch 32) -- logp(x) = -309743.062 +/- 893.310
+Evaluate (epoch 32) -- logp(x) = -324945.250 +/- 298.129
+Evaluate (epoch 32) -- logp(x) = -302919.656 +/- 25.575
+Evaluate (epoch 33) -- logp(x) = -255478.781 +/- 26.369
+Evaluate (epoch 33) -- logp(x) = -8396612829184.000 +/- 280810717184.000
+Evaluate (epoch 33) -- logp(x) = -1756052.500 +/- 297178.031
+Evaluate (epoch 33) -- logp(x) = -14049043546112.000 +/- 316724346880.000
+Evaluate (epoch 28) -- logp(x) = -1433336.250 +/- 210152.516
+Evaluate (epoch 33) -- logp(x) = -254242.828 +/- 7.131
+Evaluate (epoch 28) -- logp(x) = -776302.812 +/- 75887.000
+Evaluate (epoch 28) -- logp(x) = -4597333504.000 +/- 890712384.000
+Evaluate (epoch 28) -- logp(x) = -133580256.000 +/- 26486222.000
+Evaluate (epoch 28) -- logp(x) = -375020.375 +/- 552.987
+Evaluate (epoch 34) -- logp(x) = -274835.750 +/- 19.013
+Evaluate (epoch 34) -- logp(x) = -282438.438 +/- 197.728
+Evaluate (epoch 34) -- logp(x) = -13163438276608.000 +/- 2606749450240.000
+Evaluate (epoch 34) -- logp(x) = -366998.500 +/- 4703.390
+Evaluate (epoch 34) -- logp(x) = -274340.906 +/- 5.458
+Evaluate (epoch 29) -- logp(x) = -367103.781 +/- 128.567
+Evaluate (epoch 29) -- logp(x) = -367003.656 +/- 164.338
+Evaluate (epoch 29) -- logp(x) = -3134644.000 +/- 546607.688
+Evaluate (epoch 29) -- logp(x) = -3554293.000 +/- 633780.250
+Evaluate (epoch 29) -- logp(x) = -365917.938 +/- 35.004
+Evaluate (epoch 35) -- logp(x) = -259273.500 +/- 34.854
+Evaluate (epoch 35) -- logp(x) = -248276800.000 +/- 49777472.000
+Evaluate (epoch 35) -- logp(x) = -19860625408.000 +/- 3932938496.000
+Evaluate (epoch 35) -- logp(x) = -74800672.000 +/- 14123776.000
+Evaluate (epoch 35) -- logp(x) = -259055.125 +/- 2.439
+Evaluate (epoch 30) -- logp(x) = -383158.938 +/- 94.904
+Evaluate (epoch 30) -- logp(x) = -434767.969 +/- 9284.402
+Evaluate (epoch 30) -- logp(x) = -382322.969 +/- 134.418
+Evaluate (epoch 30) -- logp(x) = -409646.062 +/- 90.895
+Evaluate (epoch 30) -- logp(x) = -366430.750 +/- 448.711
+Evaluate (epoch 36) -- logp(x) = -257819.484 +/- 69.358
+Evaluate (epoch 36) -- logp(x) = -499902.625 +/- 12561.882
+Evaluate (epoch 36) -- logp(x) = -618411130880.000 +/- 122463608832.000
+Evaluate (epoch 36) -- logp(x) = -80676093952.000 +/- 3695801344.000
+Evaluate (epoch 36) -- logp(x) = -257984.297 +/- 1.873
+Evaluate (epoch 31) -- logp(x) = -1876523.000 +/- 139860.641
+Evaluate (epoch 31) -- logp(x) = -1414764.125 +/- 102483.266
+Evaluate (epoch 31) -- logp(x) = -350906.844 +/- 4385.161
+Evaluate (epoch 31) -- logp(x) = -315913.031 +/- 477.195
+Evaluate (epoch 31) -- logp(x) = -4490692.000 +/- 8200.507
+Evaluate (epoch 37) -- logp(x) = -317594.281 +/- 39.833
+Evaluate (epoch 37) -- logp(x) = -351046.406 +/- 1322.584
+Evaluate (epoch 37) -- logp(x) = -723906304.000 +/- 87394352.000
+Evaluate (epoch 37) -- logp(x) = -1260211.250 +/- 57247.742
+Evaluate (epoch 37) -- logp(x) = -316366.938 +/- 6.215
+Evaluate (epoch 32) -- logp(x) = -306902.219 +/- 2461.654
+Evaluate (epoch 32) -- logp(x) = -381944.125 +/- 19070.057
+Evaluate (epoch 32) -- logp(x) = -2363852324864.000 +/- 328410660864.000
+Evaluate (epoch 32) -- logp(x) = -289353.375 +/- 535.483
+Evaluate (epoch 32) -- logp(x) = -335188.969 +/- 1205.410
+Evaluate (epoch 38) -- logp(x) = -422071.500 +/- 117.297
+Evaluate (epoch 38) -- logp(x) = -4647164.000 +/- 846709.188
+Evaluate (epoch 38) -- logp(x) = -620741120.000 +/- 122790800.000
+Evaluate (epoch 38) -- logp(x) = -279213184.000 +/- 7946092.500
+Evaluate (epoch 38) -- logp(x) = -421216.688 +/- 33.798
+Evaluate (epoch 33) -- logp(x) = -284669.438 +/- 153.392
+Evaluate (epoch 33) -- logp(x) = -289067.562 +/- 365.226
+Evaluate (epoch 33) -- logp(x) = -570035.375 +/- 18343.234
+Evaluate (epoch 33) -- logp(x) = -281397.625 +/- 85.419
+Evaluate (epoch 33) -- logp(x) = -286342.688 +/- 45.286
+Evaluate (epoch 39) -- logp(x) = -334217.688 +/- 26.151
+Evaluate (epoch 39) -- logp(x) = -1906312478720.000 +/- 382700158976.000
+Evaluate (epoch 39) -- logp(x) = -59639730176.000 +/- 11810362368.000
+Evaluate (epoch 39) -- logp(x) = -1241820800.000 +/- 176514800.000
+Evaluate (epoch 39) -- logp(x) = -334341.438 +/- 5.415
+Evaluate (epoch 40) -- logp(x) = -262924.250 +/- 7.461
+Evaluate (epoch 40) -- logp(x) = -212794800.000 +/- 31364490.000
+Evaluate (epoch 40) -- logp(x) = -265438.219 +/- 291.111
+Evaluate (epoch 40) -- logp(x) = -14587740028928.000 +/- 1123997188096.000
+Evaluate (epoch 40) -- logp(x) = -263488.625 +/- 26.665
+Evaluate (epoch 34) -- logp(x) = -5009250.500 +/- 279437.094
+Evaluate (epoch 34) -- logp(x) = -6148863.000 +/- 525446.188
+Evaluate (epoch 34) -- logp(x) = -2845759.000 +/- 366395.844
+Evaluate (epoch 34) -- logp(x) = -308241.938 +/- 1032.520
+Evaluate (epoch 34) -- logp(x) = -1563456.250 +/- 2651.583
+Evaluate (epoch 41) -- logp(x) = -240414.406 +/- 8.898
+Evaluate (epoch 41) -- logp(x) = -6978298445824.000 +/- 696902287360.000
+Evaluate (epoch 41) -- logp(x) = -260561.156 +/- 3989.089
+Evaluate (epoch 41) -- logp(x) = -21219650830336.000 +/- 1628927426560.000
+Evaluate (epoch 41) -- logp(x) = -240460.500 +/- 2.291
+Evaluate (epoch 35) -- logp(x) = -8049367.500 +/- 1550001.750
+Evaluate (epoch 35) -- logp(x) = -241898.812 +/- 401.285
+Evaluate (epoch 35) -- logp(x) = -256632.938 +/- 275.792
+Evaluate (epoch 35) -- logp(x) = -258335.469 +/- 2471.812
+Evaluate (epoch 35) -- logp(x) = -23563234.000 +/- 117250.094
+Evaluate (epoch 42) -- logp(x) = -221259.734 +/- 21.224
+Evaluate (epoch 42) -- logp(x) = -516792342544384.000 +/- 55754157457408.000
+Evaluate (epoch 42) -- logp(x) = -226495.375 +/- 969.270
+Evaluate (epoch 42) -- logp(x) = -844457679257600.000 +/- 21059602481152.000
+Evaluate (epoch 42) -- logp(x) = -221515.875 +/- 2.775
+Evaluate (epoch 36) -- logp(x) = -754995.438 +/- 16283.163
+Evaluate (epoch 36) -- logp(x) = -2189355.750 +/- 219842.578
+Evaluate (epoch 36) -- logp(x) = -295047.312 +/- 7734.071
+Evaluate (epoch 36) -- logp(x) = -35502224.000 +/- 7008694.000
+Evaluate (epoch 36) -- logp(x) = -737677.188 +/- 3068.991
+Evaluate (epoch 43) -- logp(x) = -233042.516 +/- 49.657
+Evaluate (epoch 43) -- logp(x) = -222234208.000 +/- 22437486.000
+Evaluate (epoch 43) -- logp(x) = -253780.141 +/- 3994.376
+Evaluate (epoch 43) -- logp(x) = -322538209280.000 +/- 45200474112.000
+Evaluate (epoch 43) -- logp(x) = -233171.094 +/- 9.406
+Evaluate (epoch 37) -- logp(x) = -289554.781 +/- 9943.908
+Evaluate (epoch 37) -- logp(x) = -345615744.000 +/- 69334416.000
+Evaluate (epoch 37) -- logp(x) = -810665705472.000 +/- 160509263872.000
+Evaluate (epoch 37) -- logp(x) = -205671.312 +/- 1117.870
+Evaluate (epoch 37) -- logp(x) = -8313512.500 +/- 589918.750
+Evaluate (epoch 44) -- logp(x) = -232177.047 +/- 31.233
+Evaluate (epoch 44) -- logp(x) = -24012595920896.000 +/- 2716126674944.000
+Evaluate (epoch 44) -- logp(x) = -1106397626368.000 +/- 219099365376.000
+Evaluate (epoch 44) -- logp(x) = -205045714911232.000 +/- 11410493931520.000
+Evaluate (epoch 44) -- logp(x) = -232287.062 +/- 6.874
+Evaluate (epoch 38) -- logp(x) = -502250766336.000 +/- 99140935680.000
+Evaluate (epoch 38) -- logp(x) = -55126646784.000 +/- 11065701376.000
+Evaluate (epoch 38) -- logp(x) = -2193787977728.000 +/- 272488644608.000
+Evaluate (epoch 38) -- logp(x) = -5140169.500 +/- 591473.250
+Evaluate (epoch 38) -- logp(x) = -3161918.000 +/- 138545.562
+Evaluate (epoch 45) -- logp(x) = -315150.250 +/- 19.590
+Evaluate (epoch 45) -- logp(x) = -1292989497344.000 +/- 155959820288.000
+Evaluate (epoch 45) -- logp(x) = -316601.219 +/- 235.972
+Evaluate (epoch 45) -- logp(x) = -8831067226112.000 +/- 332183699456.000
+Evaluate (epoch 45) -- logp(x) = -315058.156 +/- 3.550
+Evaluate (epoch 39) -- logp(x) = -86829842432.000 +/- 11246158848.000
+Evaluate (epoch 39) -- logp(x) = -159426019328.000 +/- 13600055296.000
+Evaluate (epoch 46) -- logp(x) = -267296.750 +/- 11.494
+Evaluate (epoch 39) -- logp(x) = -129403797504.000 +/- 7723883520.000
+Evaluate (epoch 46) -- logp(x) = -207354512.000 +/- 41559464.000
+Evaluate (epoch 46) -- logp(x) = -268999.250 +/- 120.339
+Evaluate (epoch 39) -- logp(x) = -471615392.000 +/- 93672112.000
+Evaluate (epoch 39) -- logp(x) = -343939.312 +/- 318.361
+Evaluate (epoch 46) -- logp(x) = -6641534631936.000 +/- 399850340352.000
+Evaluate (epoch 46) -- logp(x) = -268458.344 +/- 1.514
+Evaluate (epoch 47) -- logp(x) = -316336.375 +/- 25.846
+Evaluate (epoch 47) -- logp(x) = -339732.938 +/- 806.918
+Evaluate (epoch 47) -- logp(x) = -319020.281 +/- 244.544
+Evaluate (epoch 47) -- logp(x) = -27546516.000 +/- 2184242.000
+Evaluate (epoch 47) -- logp(x) = -318273.875 +/- 5.121
+Evaluate (epoch 40) -- logp(x) = -2578308096.000 +/- 136076288.000
+Evaluate (epoch 40) -- logp(x) = -2743687680.000 +/- 37395228.000
+Evaluate (epoch 40) -- logp(x) = -3466348544.000 +/- 68273584.000
+Evaluate (epoch 40) -- logp(x) = -386591.875 +/- 24.651
+Evaluate (epoch 40) -- logp(x) = -2306933248.000 +/- 79432416.000
+Evaluate (epoch 48) -- logp(x) = -216395.188 +/- 28.738
+Evaluate (epoch 48) -- logp(x) = -299089.875 +/- 4840.616
+Evaluate (epoch 48) -- logp(x) = -52240964.000 +/- 10302189.000
+Evaluate (epoch 48) -- logp(x) = -14388116.000 +/- 958327.500
+Evaluate (epoch 48) -- logp(x) = -217206.156 +/- 5.956
+Evaluate (epoch 41) -- logp(x) = -218556976.000 +/- 42603060.000
+Evaluate (epoch 41) -- logp(x) = -8773110.000 +/- 954458.125
+Evaluate (epoch 41) -- logp(x) = -10241014.000 +/- 1917274.625
+Evaluate (epoch 41) -- logp(x) = -49620036.000 +/- 3432198.500
+Evaluate (epoch 41) -- logp(x) = -563812.500 +/- 1239.295
+Evaluate (epoch 49) -- logp(x) = -244732.969 +/- 27.032
+Evaluate (epoch 49) -- logp(x) = -640339.812 +/- 76860.836
+Evaluate (epoch 49) -- logp(x) = -264231712.000 +/- 30427334.000
+Evaluate (epoch 49) -- logp(x) = -344933.438 +/- 6516.396
+Evaluate (epoch 49) -- logp(x) = -246162.250 +/- 31.070
+Evaluate (epoch 42) -- logp(x) = -3328747.250 +/- 398749.156
+Evaluate (epoch 42) -- logp(x) = -15265851.000 +/- 1241639.375
+Evaluate (epoch 42) -- logp(x) = -19396148.000 +/- 596637.188
+Evaluate (epoch 42) -- logp(x) = -4496483.500 +/- 755711.000
+Evaluate (epoch 42) -- logp(x) = -26193338.000 +/- 92473.750
+Evaluate (epoch 43) -- logp(x) = -17072775168.000 +/- 2191383808.000
+Evaluate (epoch 43) -- logp(x) = -9928886272.000 +/- 714850176.000
+Evaluate (epoch 43) -- logp(x) = -13243619328.000 +/- 1230445440.000
+Evaluate (epoch 43) -- logp(x) = -7108042240.000 +/- 798489152.000
+Evaluate (epoch 43) -- logp(x) = -14850035712.000 +/- 173132384.000
+Evaluate (epoch 44) -- logp(x) = -2021112576.000 +/- 401594432.000
+Evaluate (epoch 44) -- logp(x) = -620930.625 +/- 1159.383
+Evaluate (epoch 44) -- logp(x) = -615376.188 +/- 136.629
+Evaluate (epoch 44) -- logp(x) = -2223449.750 +/- 281985.250
+Evaluate (epoch 44) -- logp(x) = -614951.625 +/- 27.226
+Evaluate (epoch 45) -- logp(x) = -29753683968.000 +/- 3898454784.000
+Evaluate (epoch 45) -- logp(x) = -17751652352.000 +/- 3044872704.000
+Evaluate (epoch 45) -- logp(x) = -68384690176.000 +/- 11724672000.000
+Evaluate (epoch 45) -- logp(x) = -3395252992.000 +/- 464064704.000
+Evaluate (epoch 45) -- logp(x) = -823124928.000 +/- 38711532.000
+Evaluate (epoch 46) -- logp(x) = -189256450048.000 +/- 35766923264.000
+Evaluate (epoch 46) -- logp(x) = -1369288960.000 +/- 163954096.000
+Evaluate (epoch 46) -- logp(x) = -151333191680.000 +/- 10093661184.000
+Evaluate (epoch 46) -- logp(x) = -29165632.000 +/- 5182685.000
+Evaluate (epoch 46) -- logp(x) = -96145489920.000 +/- 18924513280.000
+Evaluate (epoch 47) -- logp(x) = -367274819584.000 +/- 34810417152.000
+Evaluate (epoch 47) -- logp(x) = -1303573561344.000 +/- 240608919552.000
+Evaluate (epoch 47) -- logp(x) = -275503251456.000 +/- 53913968640.000
+Evaluate (epoch 47) -- logp(x) = -13526662144.000 +/- 1552948992.000
+Evaluate (epoch 47) -- logp(x) = -3727120384.000 +/- 412265568.000
+Evaluate (epoch 48) -- logp(x) = -6276362.000 +/- 311148.250
+Evaluate (epoch 48) -- logp(x) = -3292420.250 +/- 185095.562
+Evaluate (epoch 48) -- logp(x) = -2911987.750 +/- 152430.172
+Evaluate (epoch 48) -- logp(x) = -159326633984.000 +/- 4681672192.000
+Evaluate (epoch 48) -- logp(x) = -3774464.500 +/- 29065.885
+Evaluate (epoch 49) -- logp(x) = -100940688.000 +/- 13748427.000
+Evaluate (epoch 49) -- logp(x) = -346677641216.000 +/- 69593554944.000
+Evaluate (epoch 49) -- logp(x) = -321499365376.000 +/- 63662698496.000
+Evaluate (epoch 49) -- logp(x) = -2199543611392.000 +/- 133146066944.000
+Evaluate (epoch 49) -- logp(x) = -21704788.000 +/- 2067793.750
+{'activation_fn': 'relu',
+ 'batch_size': 4,
+ 'channel': -1,
+ 'cond_label_size': None,
+ 'conditional': False,
+ 'data_dir': './data/',
+ 'dataset': '',
+ 'device': device(type='cuda', index=0),
+ 'flip_toy_var_order': False,
+ 'generate': False,
+ 'hidden_size': 64,
+ 'input_dims': torch.Size([3, 128, 128]),
+ 'input_order': 'random',
+ 'input_size': 65536,
+ 'log_interval': 1000,
+ 'lr': 0.0001,
+ 'model': 'realnvp',
+ 'n_blocks': 32,
+ 'n_components': 1,
+ 'n_epochs': 50,
+ 'n_hidden': 1,
+ 'no_batch_norm': False,
+ 'no_cuda': False,
+ 'output_dir': './results/mafencoderTrue_channel-1_nblocks32/',
+ 'restore_file': None,
+ 'results_file': 'results.txt',
+ 'seed': 1,
+ 'start_epoch': 0,
+ 'train': False,
+ 'use_encoder': True}
+RealNVP(
+  (net): FlowSequential(
+    (0): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+    )
+    (1): BatchNorm()
+    (2): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+    )
+    (3): BatchNorm()
+    (4): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+    )
+    (5): BatchNorm()
+    (6): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+    )
+    (7): BatchNorm()
+    (8): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+    )
+    (9): BatchNorm()
+    (10): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+    )
+    (11): BatchNorm()
+    (12): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+    )
+    (13): BatchNorm()
+    (14): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+    )
+    (15): BatchNorm()
+    (16): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+    )
+    (17): BatchNorm()
+    (18): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+    )
+    (19): BatchNorm()
+    (20): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+    )
+    (21): BatchNorm()
+    (22): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+    )
+    (23): BatchNorm()
+    (24): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+    )
+    (25): BatchNorm()
+    (26): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+    )
+    (27): BatchNorm()
+    (28): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+    )
+    (29): BatchNorm()
+    (30): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+    )
+    (31): BatchNorm()
+    (32): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+    )
+    (33): BatchNorm()
+    (34): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+    )
+    (35): BatchNorm()
+    (36): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+    )
+    (37): BatchNorm()
+    (38): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+    )
+    (39): BatchNorm()
+    (40): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+    )
+    (41): BatchNorm()
+    (42): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+    )
+    (43): BatchNorm()
+    (44): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+    )
+    (45): BatchNorm()
+    (46): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+    )
+    (47): BatchNorm()
+    (48): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+    )
+    (49): BatchNorm()
+    (50): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+    )
+    (51): BatchNorm()
+    (52): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+    )
+    (53): BatchNorm()
+    (54): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+    )
+    (55): BatchNorm()
+    (56): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+    )
+    (57): BatchNorm()
+    (58): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+    )
+    (59): BatchNorm()
+    (60): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+    )
+    (61): BatchNorm()
+    (62): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=65536, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=65536, bias=True)
+      )
+    )
+    (63): BatchNorm()
+  )
+)
+Evaluate logp(x) = -69271.578 +/- 3.452
+Evaluate logp(x) = -69520.422 +/- 2.637
+Evaluate logp(x) = -69563.969 +/- 1.664
+Evaluate logp(x) = -68753.469 +/- 2.417
+Evaluate logp(x) = -69212.508 +/- 1.497
+{'activation_fn': 'relu',
+ 'batch_size': 4,
+ 'channel': -1,
+ 'cond_label_size': None,
+ 'conditional': False,
+ 'data_dir': './data/',
+ 'dataset': '',
+ 'device': device(type='cuda', index=0),
+ 'flip_toy_var_order': False,
+ 'generate': False,
+ 'hidden_size': 64,
+ 'input_dims': torch.Size([3, 128, 128]),
+ 'input_order': 'random',
+ 'input_size': 49152,
+ 'log_interval': 1000,
+ 'lr': 0.0001,
+ 'model': 'realnvp',
+ 'n_blocks': 32,
+ 'n_components': 1,
+ 'n_epochs': 50,
+ 'n_hidden': 1,
+ 'no_batch_norm': False,
+ 'no_cuda': False,
+ 'output_dir': './results/mafencoderFalse_channel-1_nblocks32/',
+ 'restore_file': None,
+ 'results_file': 'results.txt',
+ 'seed': 1,
+ 'start_epoch': 0,
+ 'train': False,
+ 'use_encoder': False}
+RealNVP(
+  (net): FlowSequential(
+    (0): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+    )
+    (1): BatchNorm()
+    (2): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+    )
+    (3): BatchNorm()
+    (4): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+    )
+    (5): BatchNorm()
+    (6): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+    )
+    (7): BatchNorm()
+    (8): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+    )
+    (9): BatchNorm()
+    (10): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+    )
+    (11): BatchNorm()
+    (12): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+    )
+    (13): BatchNorm()
+    (14): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+    )
+    (15): BatchNorm()
+    (16): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+    )
+    (17): BatchNorm()
+    (18): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+    )
+    (19): BatchNorm()
+    (20): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+    )
+    (21): BatchNorm()
+    (22): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+    )
+    (23): BatchNorm()
+    (24): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+    )
+    (25): BatchNorm()
+    (26): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+    )
+    (27): BatchNorm()
+    (28): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+    )
+    (29): BatchNorm()
+    (30): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+    )
+    (31): BatchNorm()
+    (32): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+    )
+    (33): BatchNorm()
+    (34): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+    )
+    (35): BatchNorm()
+    (36): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+    )
+    (37): BatchNorm()
+    (38): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+    )
+    (39): BatchNorm()
+    (40): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+    )
+    (41): BatchNorm()
+    (42): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+    )
+    (43): BatchNorm()
+    (44): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+    )
+    (45): BatchNorm()
+    (46): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+    )
+    (47): BatchNorm()
+    (48): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+    )
+    (49): BatchNorm()
+    (50): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+    )
+    (51): BatchNorm()
+    (52): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+    )
+    (53): BatchNorm()
+    (54): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+    )
+    (55): BatchNorm()
+    (56): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+    )
+    (57): BatchNorm()
+    (58): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+    )
+    (59): BatchNorm()
+    (60): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+    )
+    (61): BatchNorm()
+    (62): LinearMaskedCoupling(
+      (s_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): Tanh()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): Tanh()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+      (t_net): Sequential(
+        (0): Linear(in_features=49152, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=64, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=64, out_features=49152, bias=True)
+      )
+    )
+    (63): BatchNorm()
+  )
+)
+Evaluate logp(x) = -77789.133 +/- 475.535
+Evaluate logp(x) = -101605.250 +/- 1670.716
+Evaluate logp(x) = -56034.320 +/- 156.966
+Evaluate logp(x) = -343258.781 +/- 10397.344
+Evaluate logp(x) = -55498.508 +/- 2.147
