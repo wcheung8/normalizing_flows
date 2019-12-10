@@ -7,6 +7,8 @@ from torch.utils.data import DataLoader, TensorDataset
 
 import datasets
 from datasets.airsim import airsimLoader
+from datasets.cityscapes import cityscapesLoader
+from datasets.fishyscapes import fishyscapesLoader
 
 
 # --------------------
@@ -92,28 +94,42 @@ def fetch_dataloaders(dataset_name, batch_size, device, flip_toy_var_order=False
 
         input_dims = train_dataset[0][0].shape
 
-    else:
+    elif dataset_name == "synthia":
 
         train_dataset = airsimLoader(split="train",
                                      subsplits=['async_fog_000_clear'],
-                                     img_size=(128, 128))
+                                     img_size=(64, 64))
         test_dataset = [airsimLoader(split="val",
                                      subsplits=["async_fog_000_clear"],
-                                     img_size=(128, 128)),
+                                     img_size=(64, 64)),
                         airsimLoader(split="val",
                                      subsplits=["async_fog_050_clear"],
-                                     img_size=(128, 128)),
+                                     img_size=(64, 64)),
                         airsimLoader(split="val",
                                      subsplits=["async_fog_100_clear"],
-                                     img_size=(128, 128)),
+                                     img_size=(64, 64)),
                         airsimLoader(split="val",
                                      subsplits=["async_fog_000_clear__{'channel':'rgb','type':'snow','value':'3'}"],
-                                     img_size=(128, 128)),
+                                     img_size=(64, 64)),
                         airsimLoader(split="val",
                                      subsplits=["async_fog_000_clear__{'channel':'rgb','type':'blackoutNoise','value':'20'}"],
-                                     img_size=(128, 128)),
+                                     img_size=(64, 64)),
                         ]
         # import ipdb; ipdb.set_trace()
+        input_dims = train_dataset[0][0].shape
+        label_size = None
+        lam = None
+    elif dataset_name == "cityscapes":
+
+        x = fishyscapesLoader()
+        import ipdb; ipdb.set_trace()
+
+        train_dataset = cityscapesLoader('/home/datasets/',
+                                         split="train",
+                                         img_size=(64, 128))
+        test_dataset = [cityscapesLoader('/home/datasets/',
+                                         split="val",
+                                         img_size=(64, 128)), fishyscapesLoader()]
         input_dims = train_dataset[0][0].shape
         label_size = None
         lam = None
@@ -130,8 +146,10 @@ def fetch_dataloaders(dataset_name, batch_size, device, flip_toy_var_order=False
         t.input_size = int(np.prod(input_dims))
         t.label_size = label_size
         t.lam = lam
-        t.name = t.subsplits[0]
-        print(t.subsplits[0])
+        if 'subsplits' in t:
+            t.name = t.subsplits[0]
+        else:
+            t.name = 'val'
 
     # construct dataloaders
     kwargs = {'num_workers': 4, 'pin_memory': True} if device.type is 'cuda' else {}

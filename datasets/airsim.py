@@ -260,7 +260,7 @@ class airsimLoader(data.Dataset):
 
     def __init__(
             self,
-            root='/home/n8k9/ripl/ros/data/airsim_03-30-2019/airsim_data_async',
+            root='/home/wcheung8/pytorch-semseg/datasets/airsim_data_async',
             split="train",
             subsplits=None,
             is_transform=False,

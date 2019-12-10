@@ -8,13 +8,13 @@ import torch.nn as nn
 import torch.nn.functional as F
 import torch.distributions as D
 import torchvision.transforms as T
-from torchvision.utils import save_image
+from torchvision.utils import save_image, make_grid
 
 import matplotlib
 
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-
+import numpy as np
 import os
 import math
 import argparse
@@ -44,7 +44,7 @@ parser.add_argument('--n_components', type=int, default=1, help='Number of Gauss
 parser.add_argument('--hidden_size', type=int, default=64, help='Hidden layer size for MADE (and each MADE block in an MAF).')
 parser.add_argument('--n_hidden', type=int, default=1, help='Number of hidden layers in each MADE.')
 parser.add_argument('--activation_fn', type=str, default='relu', help='What activation function to use in the MADEs.')
-parser.add_argument('--input_order', type=str, default='random', help='What input order to use (sequential | random).')
+parser.add_argument('--input_order', type=str, default='sequential', help='What input order to use (sequential | random).')
 parser.add_argument('--conditional', default=False, action='store_true', help='Whether to use a conditional model.')
 parser.add_argument('--no_batch_norm', action='store_true')
 # training params
@@ -84,7 +84,7 @@ def loadEncoder():
 
     model = torch.nn.DataParallel(model, device_ids=range(torch.cuda.device_count()))
 
-    model_pkl = '/home/wcheung8/Desktop/pytorch-semseg/models/DeepLab/rgb_DeepLab/rgb_DeepLab_airsim_T000.pkl'
+    model_pkl = '/home/wcheung8/pytorch-semseg/models/DeepLab/rgb_DeepLab/rgb_DeepLab_airsim_T000.pkl'
 
     checkpoint = torch.load(model_pkl)
 
@@ -592,6 +592,8 @@ def evaluate(model, dataloader, epoch, args):
     encoder.eval()
     sum_mean = 0
     sum_std = 0
+    probs = []
+    stds = []
 
     all_imgs = []
     all_probs = []
@@ -653,7 +655,9 @@ def evaluate(model, dataloader, epoch, args):
             print(output)
             print(output, file=open(args.results_file, 'a'))
 
+            # TODO try averaging
             samples = input_logprobs.min(1)[0].view(-1, 1, *data[0].shape[2:])
+            samples = input_logprobs.mean(1).view(-1, 1, *data[0].shape[2:])
 
             all_probs.append(samples)
             all_imgs.append(data[0].cuda())
@@ -663,12 +667,21 @@ def evaluate(model, dataloader, epoch, args):
             sum_mean += logprob_mean
             sum_std += logprob_std
 
+            probs.append(logprob_mean)
+            stds.append(logprob_std)
 
     all_probs = torch.cat(all_probs)
     all_imgs = torch.cat(all_imgs)
-    save_image(all_probs, os.path.join(args.output_dir, (t.dataset.name) + "samples.png"), nrow=args.batch_size, normalize=True)
-    save_image(all_imgs, os.path.join(args.output_dir, (t.dataset.name) + "images.png"), nrow=args.batch_size, normalize=True)
-    return sum_mean, logprob_std
+    x = make_grid(all_probs,
+                  nrow=args.batch_size,
+                  range=(all_probs[0].min(), all_probs[0].max()*2),
+                  normalize=True,
+                  scale_each=False)
+
+    plt.imsave(os.path.join(args.output_dir, "samples_{}.png".format(epoch)), np.transpose(x.cpu(), (1, 2, 0)).numpy())
+    # import ipdb; ipdb.set_trace()
+    save_image(all_imgs, os.path.join(args.output_dir, "images_{}.png".format(epoch)), nrow=args.batch_size, normalize=True, scale_each=True)
+    return probs, stds
 
 
 @torch.no_grad()
@@ -709,19 +722,29 @@ def train_and_evaluate(model, train_loader, test_loader, optimizer, args):
 
     for i in range(args.start_epoch, args.start_epoch + args.n_epochs):
         train(model, train_loader, optimizer, i, args)
-        eval_logprob, _ = evaluate(model, test_loader, i, args)
+        eval_logprobs, _ = evaluate(model, test_loader, i, args)
 
         # save training checkpoint
         torch.save({'epoch': i,
                     'model_state': model.state_dict(),
                     'optimizer_state': optimizer.state_dict()},
-                   os.path.join(args.output_dir, 'model_checkpoint.pt'))
+                   os.path.join(args.output_dir, 'best_model.pt'))
         # save model only
         torch.save(model.state_dict(), os.path.join(args.output_dir, 'model_state.pt'))
 
         # save best state
-        if eval_logprob > best_eval_logprob:
-            best_eval_logprob = eval_logprob
+        import math
+        in_prob = eval_logprobs[0]
+        out_prob = max(eval_logprobs[1:])
+
+        # a = -torch.log(1 - torch.exp(in_prob))
+        a = in_prob
+        b = -out_prob
+        score = a + b
+        print("CURRENT LOG PROB: {} + {} = {}".format(a, b, score))
+        print("BEST LOG PROB: {}".format(best_eval_logprob))
+        if score > best_eval_logprob:
+            best_eval_logprob = score
             torch.save({'epoch': i,
                         'model_state': model.state_dict(),
                         'optimizer_state': optimizer.state_dict()},
@@ -840,14 +863,14 @@ if __name__ == '__main__':
     model = model.to(args.device)
     optimizer = torch.optim.Adam(model.parameters(), lr=args.lr, weight_decay=1e-6)
 
-    # if not args.train:
-    #     # load model and optimizer states
-    #     state = torch.load(os.path.join(args.output_dir, "best_model.pt"), map_location=args.device)
-    #     model.load_state_dict(state['model_state'])
-    #     optimizer.load_state_dict(state['optimizer_state'])
-    #     args.start_epoch = state['epoch'] + 1
-    #     del state
-    #     args.results_file = os.path.join(args.output_dir, args.results_file)
+    if not args.train:
+        # load model and optimizer states
+        state = torch.load(os.path.join(args.output_dir, "model_checkpoint.pt"), map_location=args.device)
+        model.load_state_dict(state['model_state'])
+        optimizer.load_state_dict(state['optimizer_state'])
+        args.start_epoch = state['epoch'] + 1
+        del state
+        args.results_file = os.path.join(args.output_dir, args.results_file)
 
     print('Loaded settings and model:')
     print(pprint.pformat(args.__dict__))
